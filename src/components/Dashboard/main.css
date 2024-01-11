@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Carlito&family=Poppins&family=Roboto&display=swap');
+
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+  font-family: 'Carlito', sans-serif !important;
+}
+
+.dashboard {
+  overflow-y: auto;
+}
+
+.newCustomer {
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  background: rgb(87, 188, 144);
+  background: linear-gradient(90deg, rgba(87, 188, 144, 1) 0%, rgba(0, 75, 64, 1) 100%);
+
+}
+
+#newCustomer:hover {
+  background: rgb(0, 75, 64);
+  background: linear-gradient(90deg, rgba(0, 75, 64, 1) 0%, rgba(87, 188, 144, 1) 100%);
+}
+
+/* container query  */
+@media screen and (max-width: 800px) {
+  .container {
+    width: 99% !important;
+  }
+}

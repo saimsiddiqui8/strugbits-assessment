@@ -1,0 +1,84 @@
+/* toggle switch btn css */
+:where(.css-dev-only-do-not-override-1adbn6x).ant-switch.ant-switch-checked {
+    background: #7a5cfa !important;
+}
+
+/* pagination color  */
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-item-active {
+    background-color: #7a5cfa !important;
+    color: #ffffff !important;
+    border-color: none !important;
+    border-radius: 3px !important;
+}
+
+.tables {
+    margin-top: 10px;
+    background-color: white;
+    align-items: center;
+    box-shadow: 0px 3px 5px #8D8D8D1A;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.thead {
+    background-color: #c5e3d5;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #015249 !important;
+    border-radius: 20px;
+    padding: 10px 0;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.btn1 {
+    background-color: #b0e1b7;
+    color: #39B54A;
+    padding: 7px 35px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn2 {
+    background-color: #ef9999;
+    color: #D80000;
+    padding: 7px 35px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
+/* responsive table data */
+.responsive-container {
+    overflow-x: auto;
+}
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* container query  */
+@media screen and (max-width: 800px) {
+    .container {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .tables {
+        display: block;
+        width: 100%;
+    }
+}

@@ -1,0 +1,40 @@
+/* radio btn styling  */
+:where(.css-dev-only-do-not-override-1adbn6x).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    border-color: #7a5cfa !important;
+    background-color: #7a5cfa !important;
+}
+
+#form {
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.uploadProfileImg {
+    font-size: 14px;
+}
+
+.pngJpeg {
+    font-size: 11px;
+}
+
+.error-message {
+    font-size: 14px;
+}
+
+
+.i-f {
+    padding: 10px 12px;
+    border-radius: 10px;
+    outline: none;
+    border: #DCDBDD 1px solid;
+}
+
+
+.btn {
+    outline: none;
+    width: 12%;
+    color: white;
+    padding: 10px 4px;
+    font-size: 0.8rem;
+    background-color: #7a5cfa;
+}
