@@ -5,9 +5,12 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FormSection from '../Dashboard/FormSection';
+import { editUser } from '../../features/Showslice';
 import "../Dashboard/main.css"
+import { useDispatch } from 'react-redux';
 
-const Edit = ({ visible, onCancel, onUpdate, customer }) => {
+const Edit = ({ visible, onCancel, customer }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const handleCancel = () => {
@@ -16,27 +19,51 @@ const Edit = ({ visible, onCancel, onUpdate, customer }) => {
 
   // form functions for validation
   const validationSchema = Yup.object().shape({
-    customername: Yup.string().required('Customer name is required'),
+    first_name: Yup.string().required('Customer name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
   });
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     if (formik.isValid) {
       setLoading(true);
-      setTimeout(() => {
+
+      try {
+        if (
+          formik.values.first_name === customer.first_name &&
+          formik.values.email === customer.email
+        ) {
+          toast.error('No changes made. Please modify the values before updating.');
+          setLoading(false);
+          return;
+        }
+        // Dispatching the editUser action with the updated user data
+        dispatch(
+          editUser({
+            id: customer.id,
+            email: formik.values.email,
+            first_name: formik.values.first_name,
+          })
+        );
+
+        toast.success('Customer updated successfully!');
         setLoading(false);
-        onUpdate(formik.values);
         onCancel();
-        toast.success('Customer updated successfully');
-      }, 3000);
+      } catch (error) {
+        console.error('Error updating customer:', error);
+        toast.error('Failed to update customer. Please try again later.');
+        setLoading(false);
+      }
     } else {
       toast.error('Form has errors. Please fix them before submitting.');
     }
   };
 
+
+
+
   const formik = useFormik({
     initialValues: {
-      customername: customer.customername,
+      first_name: customer.first_name,
       email: customer.email,
     },
     validationSchema: validationSchema,
@@ -47,7 +74,7 @@ const Edit = ({ visible, onCancel, onUpdate, customer }) => {
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       title={<h2 className='text-center fw-bold mt-3'>Edit Customer</h2>}
       onOk={handleUpdate}
       onCancel={handleCancel}
@@ -61,19 +88,19 @@ const Edit = ({ visible, onCancel, onUpdate, customer }) => {
         <FormSection
           placeholder="Customer Name"
           type="text"
-          id="customername"
-          name="customername"
-          value={formik.values.customername}
+          id="first_name"
+          name="first_name"
+          value={formik.values.first_name || ''}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          errorMessage={formik.touched.customername && formik.errors.customername}
+          errorMessage={formik.touched.first_name && formik.errors.first_name}
         />
         <FormSection
           placeholder="Email"
           type="text"
           id="email"
           name="email"
-          value={formik.values.email}
+          value={formik.values.email || ''}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           errorMessage={formik.touched.email && formik.errors.email}

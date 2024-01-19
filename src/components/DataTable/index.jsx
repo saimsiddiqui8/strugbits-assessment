@@ -1,11 +1,15 @@
-import React, { useState, useMemo } from 'react';
-import { Switch, Pagination } from 'antd';
+import React, { useState } from 'react';
 import "./dataTable.css";
 import { MdOutlineUnfoldMore } from "react-icons/md";
-import DeleteModal from './Delete';
+import Delete from './Delete';
 import Edit from './Edit';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteUser } from '../../features/Showslice';
 
 const DataTable = ({ data }) => {
+  const dispatch = useDispatch();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
@@ -14,20 +18,25 @@ const DataTable = ({ data }) => {
     setSelectedCustomer(customer);
     setDeleteModalVisible(true);
   };
-
+  
   const showEditModal = (customer) => {
     setSelectedCustomer(customer);
     setEditModalVisible(true);
   };
 
   const handleDelete = () => {
-    // Implement your delete logic here
-    console.log('Deleting customer:', selectedCustomer);
-    setDeleteModalVisible(false);
+    if (selectedCustomer) {
+      // Dispatch the deleteUserById action with the user ID
+      dispatch(deleteUser(selectedCustomer.id));
+      setDeleteModalVisible(false)
+      toast.success('Customer deleted successfully');
+    } else {
+      console.error("No selected customer to delete.");
+    }
   };
 
+
   const handleEditUpdate = (updatedValues) => {
-    // Implement your update logic here
     console.log('Updating customer:', updatedValues);
     setEditModalVisible(false);
   };
@@ -38,7 +47,7 @@ const DataTable = ({ data }) => {
   };
   return (
     <div className='responsive-container'>
-      <div className='table-container  overflow-hidden'>
+      <div className='table-container '>
         <div className='thead d-flex justify-content-evenly'>
           <span>Customer ID <MdOutlineUnfoldMore /></span>
           <span>Customer Name <MdOutlineUnfoldMore /></span>
@@ -55,15 +64,17 @@ const DataTable = ({ data }) => {
                 <span>{elem.email}</span>
                 <span>  <button className='btn1' onClick={() => showEditModal(elem)}>Edit</button></span>
                 <span>  <button className='btn2' onClick={() => showDeleteModal(elem)}>Delete</button></span>
+
               </div>
             )
           })
         }
       </div>
-      <DeleteModal
+      <Delete
         visible={deleteModalVisible}
         onCancel={handleCancel}
         onDelete={handleDelete}
+        customer={selectedCustomer}
       />
       {selectedCustomer && (
         <Edit

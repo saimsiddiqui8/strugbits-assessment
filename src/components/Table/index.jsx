@@ -10,6 +10,7 @@ function Table() {
     const data = useSelector((state) => {
         return state.app
     })
+    console.log(data);
 
     useEffect(() => {
         dispatch(getAllData())

@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.11.1",
     "antd-img-crop": "^4.21.0",
-    "firebase": "^10.7.1",
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",

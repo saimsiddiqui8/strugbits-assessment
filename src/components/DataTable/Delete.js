@@ -1,33 +1,22 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const Delete = ({ visible, onCancel, onDelete }) => {
-    const showToast = () => {
-        toast.success('Customer deleted successfully');
-    };
-
-    const handleDelete = () => {
-        onDelete();
-        showToast(); 
-    };
-
+const Delete = ({ visible, onCancel, onDelete, customer }) => {
     return (
         <Modal
-            visible={visible}
+            open={visible}
             title=" "
             onCancel={onCancel}
-            footer={[
+            footer={
                 <div className='d-flex flex-row'>
                     <Button className='w-50 bg-secondary text-white' key="cancel" onClick={onCancel}>
                         Cancel
                     </Button>
-                    <Button className='w-50 bg-danger text-white' type="danger" onClick={handleDelete}>
+                    <Button className='w-50 bg-danger text-white' type="danger" onClick={() =>  onDelete()}>
                         Delete
                     </Button>
                 </div>
-            ]}
+            }
         >
             <div className='text-center mt-5 '>
                 <img src='/images/delete.png' alt='img' />

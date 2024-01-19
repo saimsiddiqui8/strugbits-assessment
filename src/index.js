@@ -1,19 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux';
-import reportWebVitals from './reportWebVitals';
-import { store } from './app/store'
+import { store } from './app/store';
 
-ReactDOM.render(
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
   <React.StrictMode>
     <div className='overflow-hidden'>
       <Provider store={store}>
         <App />
       </Provider>
     </div>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
-
-reportWebVitals();
